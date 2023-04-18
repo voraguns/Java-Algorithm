@@ -10,9 +10,8 @@ class Start {
         first.next.next.name = "Talingchan";
         
         Station current = first;
-        while(current != null) {
-            System.out.println(current.name);
-            current = current.next;
+        for(Station c = first; c != null; c = c.next) {
+            System.out.println(c.name);
         }
     }
 }
