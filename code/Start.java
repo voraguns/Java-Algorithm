@@ -3,10 +3,8 @@ class Start {
         print(7);
     }
     static void print(int n) {
-        int i = 1;
-        while(i <= n) {
-            System.out.println(i);
-            i++;
-        }
+        if(n == 0) return;
+        print(n-1);
+        System.out.println(n);
     }
 }
