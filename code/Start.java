@@ -9,7 +9,13 @@ class Start {
             if (current == null) break;
             if (current.length() == 5) {
                 n++;
-                System.out.println(n + ": " + current);
+                char[] a = current.toCharArray();
+                int point= 0;
+                for (int i = 0; i < a.length; i++) {
+                    if (a[i] == 'W') point = point + 3;
+                    if (a[i] == 'D') point = point + 1;
+                }
+                System.out.println(n + ": " + current + " " + point);
             } else {
                 q.insert(current + "W");
                 q.insert(current + "D");
