@@ -3,7 +3,20 @@ class Start {
         String[] a = { "T", "P", "J", "W", "I", "K", "Z" };
         Engine e = new Engine();
         Node root = e.build(a);
-        System.out.println(root.right.left.name);
+        Queue q = new Queue();
+        q.create(a.length + 1);
+        q.insert(root);
+        while(true) {
+            Node current = q.remove();
+            if (current == null) break;
+            System.out.println(current.name);
+            if(current.left != null) {
+                q.insert(current.left);
+            }
+            if(current.right != null) {
+                q.insert(current.right);
+            }
+        }
     }
 }
 
@@ -26,6 +39,21 @@ class Engine {
         int a = count(c.left);
         int b = count(c.right);
         return a + b + 1;
+    }
+}
+
+
+class Queue {
+    Node[] data;
+    int front = 0, rear = 0;
+    void create(int size) {
+        data = new Node[size];
+    }
+    void insert(Node e) {
+        data[rear++] = e;
+    }
+    Node remove() {
+        return data[front++];
     }
 }
 
