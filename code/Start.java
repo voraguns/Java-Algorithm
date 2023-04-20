@@ -1,60 +1,36 @@
 class Start {
     public static void main(String[] data) {
-        Player root;
-        root = new Player();
-        root.name = "Satoshi";
-        root.number = 7;
-        Player p = new Player();
-        p.name = "Frank";
-        p.number = 8;
-        
-        root.left = p;
-        root.right = new Player();
-        root.right.name = "Michael";
-        root.right.number = 10;
-        
-        Player q = new Player();
-        root.left.left = q;
-        q.name = "Jordan";
-        q.number = 1;
-        
-        Player r = new Player();
-        root.right.left = r;
-        r.name = "James";
-        r.number = 9;
-        
-        System.out.println(root.number);
-        System.out.println(root.left.number);
-        System.out.println(root.right.number);
-        System.out.println(q.number);
-        System.out.println(r.number);
-        
-        int t = count(root);
-        int ff = sum(root);
-        System.out.println("Count node : " + t);
-        System.out.println("Sum node : " + ff);
-    }
-    
-    // Count the node in binary tree
-    static int count(Player x) {
-        if (x == null) return 0;
-        int a = count(x.left);
-        int b = count(x.right);
-        return a + b + 1;
-    }
-    
-    static int sum(Player x) {
-        if (x == null) return 0;
-        int a = sum(x.left);
-        int b = sum(x.right);
-        int c = x.number;
-        return a + b + c;
+        String[] a = { "T", "P", "J", "W", "I", "K", "Z" };
+        Engine e = new Engine();
+        Node root = e.build(a);
+        System.out.println(root.right.left.name);
     }
 }
 
-class Player {
+class Engine {
+    Node build(String[] a) {
+        return build(a, 0, a.length - 1);
+    }
+    Node build(String[] a, int start, int finish) {
+        if (start > finish) return null;
+        int mid = (start + finish) / 2;
+        Node current = new Node();
+        current.name = a[mid];
+        current.left = build(a, start, mid - 1);
+        current.right = build(a, mid + 1, finish);
+        return current;
+    }
+    
+    int count(Node c) {
+        if (c == null) return 0;
+        int a = count(c.left);
+        int b = count(c.right);
+        return a + b + 1;
+    }
+}
+
+class Node {
+    Node left;
+    Node right;
     String name;
-    int number;
-    Player left;
-    Player right;
 }
